@@ -1,0 +1,54 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.pub-cache/
+.pub/
+*.iml
+*.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Platform specific
+android/
+ios/
+windows/
+linux/
+macos/
+web/
+
+# Artifacts
+*.apk
+*.ipa
+*.dmg
+
+# Testing
+test/
+.coverage/
+
+# Environment
+.env
+*.pem
+key.properties
+google-services.json
+GoogleService-Info.plist
+
+# Third party
+third_party/
+pubspec.lock
