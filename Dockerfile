@@ -1,4 +1,4 @@
-# Stage 1: Build Flutter Web App
+# Stage 1: Build Flutter Android APK
 FROM ghcr.io/cirruslabs/flutter:latest AS builder
 
 WORKDIR /app
@@ -12,20 +12,17 @@ COPY . .
 # Get dependencies
 RUN flutter pub get
 
-# Configure project for web
-RUN flutter create . --platforms web
+# Build Android APK
+RUN flutter build apk --release
 
-# Build web app with optimization flags
-RUN flutter build web --release --no-tree-shake-icons
-
-# Stage 2: Serve with Nginx
+# Stage 2: Serve APK for download
 FROM nginx:alpine
 
-# Copy built app to nginx
-COPY --from=builder /app/build/web /usr/share/nginx/html
+# Copy built APK to nginx
+COPY --from=builder /app/build/app/outputs/flutter-app-release.apk /usr/share/nginx/html/app.apk
 
 # Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx-apk.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
