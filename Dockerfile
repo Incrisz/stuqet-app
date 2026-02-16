@@ -12,6 +12,9 @@ COPY . .
 # Get dependencies
 RUN flutter pub get
 
+# Recreate Android project structure with updated Gradle
+RUN flutter create . --platforms android
+
 # Build Android APK
 RUN flutter build apk --release
 
