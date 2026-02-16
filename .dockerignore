@@ -48,7 +48,3 @@ test/
 key.properties
 google-services.json
 GoogleService-Info.plist
-
-# Third party
-third_party/
-pubspec.lock

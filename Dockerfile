@@ -3,17 +3,17 @@ FROM ghcr.io/cirruslabs/flutter:latest AS builder
 
 WORKDIR /app
 
-# Copy pubspec files
-COPY pubspec.yaml pubspec.lock* ./
+# Suppress Flutter root user warning
+ENV FLUTTER_ROOT_ANDROID /
+
+# Copy entire project (required for path dependencies in third_party/)
+COPY . .
 
 # Get dependencies
 RUN flutter pub get
 
-# Copy entire project
-COPY . .
-
-# Build web app
-RUN flutter build web --release
+# Build web app with optimization flags
+RUN flutter build web --release --no-tree-shake-icons
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
