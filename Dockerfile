@@ -4,13 +4,16 @@ FROM ghcr.io/cirruslabs/flutter:latest AS builder
 WORKDIR /app
 
 # Suppress Flutter root user warning
-ENV FLUTTER_ROOT_ANDROID /
+ENV FLUTTER_ROOT_ANDROID="/"
 
 # Copy entire project (required for path dependencies in third_party/)
 COPY . .
 
 # Get dependencies
 RUN flutter pub get
+
+# Configure project for web
+RUN flutter create . --platforms web
 
 # Build web app with optimization flags
 RUN flutter build web --release --no-tree-shake-icons
