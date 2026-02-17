@@ -22,6 +22,9 @@ RUN find /root/.pub-cache/hosted/pub.dev -path "*/android/build.gradle" | while 
       module_namespace="$(printf '%s' "$module_name" | tr -c '[:alnum:]' '_')"; \
       sed -i "/^[[:space:]]*android[[:space:]]*{/a\\    namespace \"com.pub.${module_namespace}\"" "$file"; \
     fi; \
+  done && \
+  find /root/.pub-cache/hosted/pub.dev -path "*/android/src/main/AndroidManifest.xml" | while read -r manifest; do \
+    sed -i -E 's/[[:space:]]package=\"[^\"]+\"//g' "$manifest"; \
   done
 
 # Build Android APK with increased heap size

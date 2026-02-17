@@ -51,7 +51,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
   Animation? _colorTween;
   late AnimationController _ColorAnimationController;
 
-  CarouselController _carouselController = CarouselController();
+  CarouselSliderController _carouselController = CarouselSliderController();
 
   //init values
 
@@ -1115,7 +1115,7 @@ class _ClassifiedAdsDetailsState extends State<ClassifiedAdsDetails>
             width: 64,
             child: Scrollbar(
               controller: _imageScrollController,
-              isAlwaysShown: false,
+              thumbVisibility: false,
               thickness: 4.0,
               child: Padding(
                 padding: app_language_rtl.$!

@@ -15,7 +15,7 @@ class Btn {
       style: TextButton.styleFrom(
           padding: padding,
           backgroundColor: color,
-          primary: MyTheme.noColor,
+          foregroundColor: MyTheme.noColor,
           minimumSize: minWidth == null ? null : Size(minWidth.toDouble(), 10),
           shape: shape),
       child: child,
@@ -47,7 +47,7 @@ class Btn {
       {required maxWidth, required height, color, shape, required child, dynamic onPressed}) {
     return TextButton(
       style: TextButton.styleFrom(
-          primary: MyTheme.noColor,
+          foregroundColor: MyTheme.noColor,
           maximumSize: Size(maxWidth, height),
           backgroundColor: color,
           shape: shape),
