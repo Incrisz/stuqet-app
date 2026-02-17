@@ -15,8 +15,16 @@ RUN flutter pub get
 # Recreate Android project structure with updated Gradle
 RUN flutter create . --platforms android
 
-# Build Android APK
-RUN flutter build apk --release
+# Fix namespace issue in outdated plugin gradle files
+RUN find /root/.pub-cache/hosted/pub.dev -name "build.gradle" -path "*/android/*" -exec \
+    grep -L "namespace" {} \; | while read file; do \
+    if grep -q "id 'com.android.library'" "$file"; then \
+      sed -i "/id 'com.android.library'/a\\    namespace \"com.example.plugin\"" "$file"; \
+    fi; \
+  done || true
+
+# Build Android APK with increased heap size
+RUN JAVA_OPTS="-Xmx2048m" flutter build apk --release
 
 # Stage 2: Serve APK for download
 FROM nginx:alpine
