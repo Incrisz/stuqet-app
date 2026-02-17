@@ -97,8 +97,6 @@ dependency_overrides:
     path: third_party/cached_network_image_platform_interface
   flutter_blurhash:
     path: third_party/flutter_blurhash
-  win32:
-    path: third_party/win32
 
 dev_dependencies:
   flutter_test:
