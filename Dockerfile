@@ -25,6 +25,9 @@ RUN find /root/.pub-cache/hosted/pub.dev -path "*/android/build.gradle" | while 
   done && \
   find /root/.pub-cache/hosted/pub.dev -path "*/android/src/main/AndroidManifest.xml" | while read -r manifest; do \
     sed -i -E 's/[[:space:]]package=\"[^\"]+\"//g' "$manifest"; \
+  done && \
+  find /root/.pub-cache/hosted/pub.dev -path "*/flutter_local_notifications-*/android/src/main/java/com/dexterous/flutterlocalnotifications/FlutterLocalNotificationsPlugin.java" | while read -r plugin_java; do \
+    sed -i 's/bigLargeIcon(null);/bigLargeIcon((android.graphics.Bitmap) null);/g' "$plugin_java"; \
   done
 
 # Build Android APK with increased heap size
