@@ -295,7 +295,28 @@ class _MyAppState extends State<MyApp> {
         ],
         child: Consumer<LocaleProvider>(builder: (context, provider, snapshot) {
           return MaterialApp.router(
-            builder: OneContext().builder,
+            builder: (context, child) => OneContext().builder(
+              context,
+              child,
+              onGenerateRoute: (route) {
+                return MaterialPageRoute(builder: (context2) {
+                  // OneContext().context = context2;
+                  return Scaffold(
+                    resizeToAvoidBottomInset: false,
+                    body: Builder(
+                      builder: (innerContext) {
+                        OneContext().context = innerContext;
+                        return child!;
+                      },
+                    ),
+                  );
+                });
+              },
+              onUnknownRoute: (route) {
+                print("abc ${route.name}");
+                return MaterialPageRoute(builder: (context) => child!);
+              },
+            ),
             routerConfig: routes,
             title: AppConfig.app_name,
             debugShowCheckedModeBanner: false,

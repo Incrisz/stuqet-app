@@ -1,6 +1,4 @@
-# active_ecommerce_flutter
 
-This is the flutter mobile application for active ecommerce cms
 
 ## Getting Started
 
